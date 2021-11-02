@@ -2,7 +2,7 @@
 ![demo](https://raw.githubusercontent.com/nekrogenesis/todo/main/demo.png)
 
 ## INSTALL
-With ANSI-COLORS:
+With ANSI color:
 	
 	make install-color
 
