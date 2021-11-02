@@ -4,6 +4,13 @@
 int main(int argc, char **argv) {
     // char *path = get_path();
     char path[] = ".todolist";
+    /* init */
+    if (argc > 1 && (STRCMP(argv[1], "init") || STRCMP(argv[1], "i"))) {
+        FILE *fp = fopen(path, "a");
+        CHECK_PTR(fp, "could not create: %s\n", path);
+        fclose(fp);
+        exit(EXIT_SUCCESS);
+    }
     List *list = get_list(path);
     if (argc == 1) {
         if (list->size == 0) {
@@ -12,15 +19,8 @@ int main(int argc, char **argv) {
         }
         print_list(list);
     } else {
-        /* init */
-        if (STRCMP(argv[1], "init") || STRCMP(argv[1], "i")) {
-            FILE *fp = fopen(path, "a");
-            CHECK_PTR(fp, "could not open: %s\n", path);
-            fclose(fp);
-        }
-
         /* add <string> ... */
-        else if (STRCMP(argv[1], "add") || STRCMP(argv[1], "a")) {
+        if (STRCMP(argv[1], "add") || STRCMP(argv[1], "a")) {
             if (argc < 3)
                 FAIL("not enough arguments\n");
             for (int i = 2; i < argc; i++) {
@@ -157,7 +157,7 @@ int main(int argc, char **argv) {
 
     }
     write_list(path, list);
-    //free_list(list);
+    free_list(list);
     //free(path);
     return EXIT_SUCCESS;
 }
