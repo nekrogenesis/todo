@@ -11,3 +11,10 @@ build:
 
 debug:
 	$(CC) $(SRC) -o $(BIN) $(DEBUG) $(DFLAGS) $(LIBS)
+
+install: build
+	cp -f todo /usr/local/bin
+	chmod 755 /usr/local/bin/todo
+
+uninstall:
+	rm -f /usr/local/bin/todo
