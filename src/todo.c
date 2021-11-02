@@ -41,11 +41,11 @@ int main(int argc, char **argv) {
             size_t entry;
             for (int i = 2; i < argc; i++) {
                 if (sscanf(argv[i], "%zu", &entry) != 1) {
-                    fprintf(stderr, "invalid argument: %s\n", argv[i]);
+                    EPRINTF("invalid argument: %s\n", argv[i]);
                     continue;
                 }
                 if ((entry > list->size) || entry <= 0) {
-                    fprintf(stderr, "invalid index: %li\n", entry);
+                    EPRINTF("invalid index: %li\n", entry);
                     continue;
                 }
                 list->line[entry - 1][0] = 'x';
@@ -59,11 +59,11 @@ int main(int argc, char **argv) {
             size_t entry;
             for (int i = 2; i < argc; i++) {
                 if (sscanf(argv[i], "%zu", &entry) != 1) {
-                    fprintf(stderr, "invalid argument: %s\n", argv[i]);
+                    EPRINTF("invalid argument: %s\n", argv[i]);
                     continue;
                 }
                 if ((entry > list->size) || entry <= 0) {
-                    fprintf(stderr, "invalid index: %li\n", entry);
+                    EPRINTF("invalid index: %li\n", entry);
                     continue;
                 }
                 list->line[entry - 1][0] = ' ';
@@ -77,11 +77,11 @@ int main(int argc, char **argv) {
             size_t entry;
             for (int i = 2; i < argc; i++) {
                 if (sscanf(argv[i], "%zu", &entry) != 1) {
-                    fprintf(stderr, "invalid argument: %s\n", argv[i]);
+                    EPRINTF("invalid argument: %s\n", argv[i]);
                     continue;
                 }
                 if ((entry > list->size) || entry <= 0) {
-                    fprintf(stderr, "invalid index: %li\n", entry);
+                    EPRINTF("invalid index: %li\n", entry);
                     continue;
                 }
                 list->line[entry - 1][0] = '\0';
@@ -150,7 +150,7 @@ int main(int argc, char **argv) {
         }
 
         else {
-            fprintf(stderr, "unknown command\n");
+            EPRINTF("unknown command\n");
         }
 
     }
@@ -212,8 +212,14 @@ void write_list(const char *path, const List *list) {
 }
 
 void print_list(const List *list) {
-    for (size_t i = 0; i < list->size; i++)
+    for (size_t i = 0; i < list->size; i++) {
+        #ifndef COLOR
         printf("%-2li %s %s", i + 1, list->line[i][0] == 'x' ? "[x]" : "[ ]", &list->line[i][1]);
+        #else
+        printf("%-2li %s %s", i + 1, list->line[i][0] == 'x' ? "\033[1;32m[X]\033[0m" : "\033[1;31m[ ]\033[0m", &list->line[i][1]);
+        #endif /* COLOR */
+
+    }
 }
 
 void free_list(List *list) {

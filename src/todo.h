@@ -7,8 +7,17 @@
 #include <stdarg.h>
 
 #define STRCMP(s1, s2) (!strcmp(s1, s2))
+
+#ifndef COLOR
 #define FAIL(fmt, ...) do { fprintf(stderr, fmt, ##__VA_ARGS__); exit(EXIT_FAILURE); } while (0)
 #define CHECK_PTR(ptr, fmt, ...) do { if (!ptr) { fprintf(stderr, fmt, ##__VA_ARGS__); exit(EXIT_FAILURE); } } while (0)
+#define EPRINTF(fmt, ...) fprintf(stderr, fmt, ##__VA_ARGS__)
+#else
+#define FAIL(fmt, ...) do { fprintf(stderr, "\033[31m" fmt, ##__VA_ARGS__); exit(EXIT_FAILURE); } while (0)
+#define CHECK_PTR(ptr, fmt, ...) do { if (!ptr) { fprintf(stderr, "\033[31m" fmt, ##__VA_ARGS__); exit(EXIT_FAILURE); } } while (0)
+#define EPRINTF(fmt, ...) fprintf(stderr, "\033[31m" fmt, ##__VA_ARGS__)
+#endif /* COLOR */
+
 
 typedef struct List{
     size_t size;
