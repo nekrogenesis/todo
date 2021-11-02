@@ -1,8 +1,7 @@
 #include "todo.h"
 
 int main(int argc, char **argv) {
-    // char *path = get_path();
-    char path[] = ".todolist";
+    char *path = get_path();
     /* init */
     if (argc > 1 && (STRCMP(argv[1], "init") || STRCMP(argv[1], "i"))) {
         FILE *fp = fopen(path, "a");
@@ -21,7 +20,7 @@ int main(int argc, char **argv) {
         /* add <string> ... */
         if (STRCMP(argv[1], "add") || STRCMP(argv[1], "a")) {
             if (argc < 3)
-                FAIL("not enough arguments\n");
+                FAIL("too few arguments\n");
             for (int i = 2; i < argc; i++) {
                 list->size++;
                 list = realloc(list, sizeof(List) + sizeof(char *) * list->size);
@@ -38,7 +37,7 @@ int main(int argc, char **argv) {
         /* check <entry> ... */
         else if (STRCMP(argv[1], "check") || STRCMP(argv[1], "c")) {
             if (argc < 3)
-                FAIL("not enough arguments\n");
+                FAIL("too few arguments\n");
             size_t entry;
             for (int i = 2; i < argc; i++) {
                 if (sscanf(argv[i], "%zu", &entry) != 1) {
@@ -56,7 +55,7 @@ int main(int argc, char **argv) {
         /* check <entry> ... */
         else if (STRCMP(argv[1], "uncheck") || STRCMP(argv[1], "u")) {
             if (argc < 3)
-                FAIL("not enough arguments\n");
+                FAIL("too few arguments\n");
             size_t entry;
             for (int i = 2; i < argc; i++) {
                 if (sscanf(argv[i], "%zu", &entry) != 1) {
@@ -74,7 +73,7 @@ int main(int argc, char **argv) {
         /* remove <entry> ... */
         else if (STRCMP(argv[1], "remove") || STRCMP(argv[1], "r")) {
             if (argc < 3)
-                FAIL("not enough arguments\n");
+                FAIL("too few arguments\n");
             size_t entry;
             for (int i = 2; i < argc; i++) {
                 if (sscanf(argv[i], "%zu", &entry) != 1) {
@@ -99,7 +98,7 @@ int main(int argc, char **argv) {
         /* edit <entry> <string> */
         else if (STRCMP(argv[1], "edit") || STRCMP(argv[1], "e")) {
             if (argc < 4)
-                FAIL("not enough arguments\n");
+                FAIL("too few arguments\n");
             size_t entry;
             if (sscanf(argv[2], "%zu", &entry) != 1)
                 FAIL("invalid argument: %s\n", argv[2]);
@@ -116,7 +115,7 @@ int main(int argc, char **argv) {
         /* move <entry> <entry> */
         else if (STRCMP(argv[1], "move") || STRCMP(argv[1], "m")) {
             if (argc < 4)
-                FAIL("not enough arguments\n");
+                FAIL("too few arguments\n");
             ssize_t from;
             ssize_t to;
             if (sscanf(argv[2], "%zi", &from) != 1)
@@ -157,7 +156,7 @@ int main(int argc, char **argv) {
     }
     write_list(path, list);
     free_list(list);
-    //free(path);
+    free(path);
     return EXIT_SUCCESS;
 }
 
