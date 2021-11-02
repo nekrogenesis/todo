@@ -1,5 +1,5 @@
 # TODO
-![demo]: https://raw.githubusercontent.com/nekrogenesis/todo/main/demo.png
+![demo](https://raw.githubusercontent.com/nekrogenesis/todo/main/demo.png)
 
 ## INSTALL
 With ANSI-COLORS:
