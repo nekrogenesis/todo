@@ -1,6 +1,5 @@
 #include "todo.h"
 
-
 int main(int argc, char **argv) {
     // char *path = get_path();
     char path[] = ".todolist";
