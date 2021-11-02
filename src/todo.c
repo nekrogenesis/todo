@@ -1,6 +1,10 @@
 #include "todo.h"
 
 int main(int argc, char **argv) {
+    #ifdef COLOR
+        atexit(reset_term_color);
+    #endif
+
     char *path = get_path();
     /* init */
     if (argc > 1 && (STRCMP(argv[1], "init") || STRCMP(argv[1], "i"))) {
@@ -104,7 +108,7 @@ int main(int argc, char **argv) {
                 FAIL("invalid argument: %s\n", argv[2]);
             if ((entry > list->size) || entry <= 0)
                 FAIL("invalid index: %li\n", entry);
-            list->line[entry - 1] = realloc(list->line[entry - 1], strlen(argv[3] + 3));
+            list->line[entry - 1] = realloc(list->line[entry - 1], strlen(argv[3]) + 3);
             CHECK_PTR(list->line[entry - 1], "failed to allocate memory\n");
             strcpy(&list->line[entry - 1][1], argv[3]);
             list->line[entry - 1][0] = ' ';
@@ -226,4 +230,8 @@ void free_list(List *list) {
     for (size_t i = 0; i < list->size; i++)
         free(list->line[i]);
     free(list);
+}
+
+void reset_term_color() {
+    printf("\033[0m");
 }

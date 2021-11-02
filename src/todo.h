@@ -29,5 +29,6 @@ List *get_list(const char *path);
 void write_list(const char *path, const List *l);
 void print_list(const List *list);
 void free_list(List *list);
+void reset_term_color();
 
 #endif /* TODO_H */
