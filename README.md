@@ -17,15 +17,12 @@ Without:
 # DOCUMENTATION
 
 	NAME
-
 		todo - todo list tracker in C
 
 	SYNOPSIS
-
 		todo [options]
 
 	OPTIONS
-
 		i, init
 			Creates a .todolist in the $HOME directory.
 
@@ -47,5 +44,4 @@ Without:
 		h, help
 
 	FILES
-
 		$HOME/.todolist
