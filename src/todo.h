@@ -18,7 +18,6 @@
 #define EPRINTF(fmt, ...) fprintf(stderr, "\033[31m" fmt, ##__VA_ARGS__)
 #endif /* COLOR */
 
-
 typedef struct List{
     size_t size;
     char *line[];
