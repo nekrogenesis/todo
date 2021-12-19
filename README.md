@@ -44,4 +44,5 @@ Without:
 		h, help
 
 	FILES
+		/usr/local/bin/todo
 		$HOME/.todolist
