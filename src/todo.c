@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
             }
         }
 
-        /* check <entry> ... */
+        /* uncheck <entry> ... */
         else if (STRCMP(argv[1], "uncheck") || STRCMP(argv[1], "u")) {
             if (argc < 3)
                 FAIL("too few arguments\n");
@@ -218,9 +218,17 @@ void write_list(const char *path, const List *list) {
 void print_list(const List *list) {
     for (size_t i = 0; i < list->size; i++) {
         #ifndef COLOR
-        printf("%-2li %s %s", i + 1, list->line[i][0] == 'x' ? "[x]" : "[ ]", &list->line[i][1]);
+            printf("%-2li %s %s", 
+                i + 1, 
+                list->line[i][0] == 'x' ? "[x]" : "[ ]", 
+                &list->line[i][1]
+            );
         #else
-        printf("%-2li %s %s", i + 1, list->line[i][0] == 'x' ? "\033[1;32m[X]\033[0m" : "\033[1;31m[ ]\033[0m", &list->line[i][1]);
+            printf("%-2li %s %s", 
+                i + 1, 
+                list->line[i][0] == 'x' ? "\033[1;32m[X]\033[0m" : "\033[1;31m[ ]\033[0m", 
+                &list->line[i][1]
+            );
         #endif /* COLOR */
 
     }
